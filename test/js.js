@@ -14,9 +14,7 @@ window.navigator.mediaDevices.getUserMedia({video: true})
     this.inverval = setInterval(async () => {
       const faces = await faceDetector.detect(video);
         faces.forEach(face => {
-          console.log(face)
           const { width, height, top, left } = face.boundingBox;
-          // console.log(face.boundingBox)
 
           faceBox.style.cssText = `
             position: absolute;
