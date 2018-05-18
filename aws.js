@@ -6,7 +6,8 @@ Object.assign(process.env, env)
 AWS.config.region = 'us-east-2'
 
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-  });
+  IdentityPoolId: process.env.IdentityPoolId
+});
 
 const S3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
