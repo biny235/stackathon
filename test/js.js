@@ -15,20 +15,18 @@ window.navigator.mediaDevices.getUserMedia({video: true})
       const faces = await faceDetector.detect(video);
         faces.forEach(face => {
           const { width, height, top, left } = face.boundingBox;
-
-          faceBox.style.cssText = `
+          faceBox.style = `
             position: absolute;
             z-index: 2;
-            width: ${width + 30}px;
-            height: ${height + 30}px;
-            top: ${top + 15}px;
-            left: ${left + 15}px;
-            border: solid black 1px;
-            background-image: url('/img.svg');
+            width: ${width + 50}px;
+            height: ${height + 50}px;
+            top: ${top - 50}px;
+            left: ${left}px;
+
             `;
-      }, 150);
+        });
+      }, 50);
   });
-})
 
 
 var canvas = document.querySelector('canvas');
@@ -45,26 +43,58 @@ const snaps = ()=>{
   let newImage = canvas.toDataURL('image/png', 0.5)
   axios.post('/facedetector', { pic: newImage })
     .then(res => res.data)
-    .then((faces)=> {
-      console.log(faces.FaceDetails[0].Emotions[0])
-      
+    .then((_faces)=> {
+      const { Emotions, AgeRange, Eyeglasses } = _faces.FaceDetails[0]
+      console.log(Emotions, AgeRange, Eyeglasses)
+      picChooser(Emotions[0])
     })
 }
-// const snap = setInterval(() => {
-//   count++
-//   ctx.clearRect(0, 0, canvas.width, canvas.height);
-//   const w = video.videoWidth
-//   const h = video.videoHeight
-//   ctx.fillRect(0, 0, w, h);
-//   ctx.drawImage(video, 0, 0, w, h);
-//   let newImage = canvas.toDataURL('image/png', 0.5)
-//   axios.post('/facedetector', { pic: newImage })
-//     .then(res => res.data)
-//     .then((faces)=> {
-//       console.log(faces)
-      
-//     })
-// }, 2000)
+
+const picChooser = (emotion) =>{
+  
+  switch (emotion.Type){
+    case "HAPPY":
+      console.log("HAPPY")
+      faceBox.classList = ''
+      faceBox.classList.add(emotion.Type)
+      break;
+    case "SAD":
+      console.log("SAD")
+      faceBox.classList = ''
+      faceBox.classList.add(emotion.Type)
+      break;
+    case "CALM":
+      console.log("CALM")
+      return "CALM"
+      break;
+    case "SURPRISED":
+      console.log("SURPRISED")
+      return "SURPRISED"
+      break;
+    case "CONFUSED":
+      console.log("CONFUSED")
+      faceBox.classList = ''
+      faceBox.classList.add(emotion.Type)
+      break;
+    default:
+      return emotion.type
+  }
+}
+const snap = setInterval(() => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const w = video.videoWidth
+  const h = video.videoHeight
+  ctx.fillRect(0, 0, w, h);
+  ctx.drawImage(video, 0, 0, w, h);
+  let newImage = canvas.toDataURL('image/png', 0.5)
+  axios.post('/facedetector', { pic: newImage })
+    .then(res => res.data)
+    .then((_faces)=> {
+      const { Emotions, AgeRange, Eyeglasses } = _faces.FaceDetails[0]
+      console.log(Emotions, AgeRange, Eyeglasses)
+      picChooser(Emotions[0])
+    })
+}, 2000)
 
 // if(count > 10){
 //   clearInterval(snap)

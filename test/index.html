@@ -1,11 +1,41 @@
 <html>
   <head>
+      <link ref="stylesheet" href="/style.css"  ></link>
+      <style>
+        .happy{
+          background-image: url('/smile/smile.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+
+        }
+        .mad{
+          background-image: url('./smile/mad.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .confused{
+          background-image: url('./smile/confused.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .sad{
+          background-image: url('./smile/sad.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .calm{
+          background-image: url('./smile/calm.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        </style>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
       <script src="/js.js" defer></script>
+      
   </head>
   <body>
     <!-- <img src='../img1.jpg' id="image"/> -->
-    <div id="facebox">
+    <div  id="facebox" class="happy">
       <div id="eye-0"></div>
       <div id="eye-1"></div>
       <!-- <div id="eye-2"></div> -->
@@ -13,7 +43,7 @@
     <video></video>
     <canvas style="display: none"></canvas>
     <button onclick="snaps()"> start </button>
-    <!-- <button onclick="clearInterval(snap)"> Stop </button> -->
+    <button onclick="clearInterval(snap)"> Stop </button>
     
     
   </body>

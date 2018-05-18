@@ -1,0 +1,14 @@
+.happy{
+  background-image: url('./smile/smile.png');
+  height: 50px;
+  width: 50px;
+}
+.mad{
+  background-image: url('./smile/mad.png');
+}
+.confused{
+  background-image: url('./smile/confused.png');
+}
+.sad{
+  background-image: url('./smile/sad.png');
+}
