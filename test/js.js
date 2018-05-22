@@ -65,17 +65,23 @@ const picChooser = (emotion) =>{
       break;
     case "CALM":
       console.log("CALM")
-      return "CALM"
+      faceBox.classList = ''
+      faceBox.classList.add(emotion.Type)
       break;
     case "SURPRISED":
       console.log("SURPRISED")
-      return "SURPRISED"
+      faceBox.classList = ''
+      faceBox.classList.add(emotion.Type)
       break;
     case "CONFUSED":
       console.log("CONFUSED")
       faceBox.classList = ''
       faceBox.classList.add(emotion.Type)
       break;
+    case "UNKNOWN":
+      console.log("UNKNOWN");
+      faceBox.classList = '';
+      faceBox.classList.add(emotion.Type);
     default:
       return emotion.type
   }
